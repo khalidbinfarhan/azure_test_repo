@@ -1,0 +1,9 @@
+{
+	"name": "demodatafactoryabir",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3a5d4314-45ef-4f84-82b7-091d39e73df9",
+		"tenantId": "33db3a29-7725-45bc-b753-2fa7747df43e"
+	}
+}

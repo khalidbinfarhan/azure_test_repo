@@ -1,0 +1,59 @@
+{
+	"name": "ParametrFilterDF",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Employee1Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "Employees"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "destinationDataSet",
+						"type": "DatasetReference"
+					},
+					"name": "EmplFilterByDept"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filterByDept"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     deptName as string",
+				"}",
+				"source(output(",
+				"          id as short,",
+				"          name as string,",
+				"          gender as string,",
+				"          salary as short,",
+				"          department as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Employees",
+				"Employees filter(department == $deptName) ~> filterByDept",
+				"filterByDept sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string",
+				"     ),",
+				"     partitionFileNames:['empFilterBy.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> EmplFilterByDept"
+			]
+		}
+	}
+}

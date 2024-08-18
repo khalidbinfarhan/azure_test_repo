@@ -1,0 +1,23 @@
+{
+	"name": "Dynamic_LinkedService_SQL",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "This is a parameterized linked service. ",
+		"parameters": {
+			"dbName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "abcd",
+			"database": "@{linkedService().dbName}",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "Nazrul",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEFBNjY3RjMxLTZCNzUtNDk3MS1BQjVGLUY4ODZGQUNGNjExNV9hZmM0ODY5Ny1mZDhjLTRhZjctODEyMy1lZDdhYTE5Mzk2ODkiDQp9"
+		}
+	}
+}

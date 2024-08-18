@@ -1,0 +1,29 @@
+{
+	"name": "trigger2",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "parameterized _pipeline",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"sourceTable": "TableABC",
+					"dbNameFromPipeline": "ProdDB",
+					"destinationTable": "TableXYZ"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2024-08-17T08:55:00",
+				"timeZone": "Bangladesh Standard Time"
+			}
+		}
+	}
+}

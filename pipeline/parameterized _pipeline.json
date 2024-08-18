@@ -1,0 +1,90 @@
+{
+	"name": "parameterized _pipeline",
+	"properties": {
+		"description": "This is a parameterized pipeline.",
+		"activities": [
+			{
+				"name": "Copy Data from One SQL to Another SQL",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "datasetSQL",
+						"type": "DatasetReference",
+						"parameters": {
+							"dbNameFromDataSet": {
+								"value": "@pipeline().parameters.dbNameFromPipeline",
+								"type": "Expression"
+							},
+							"tableName": {
+								"value": "@pipeline().parameters.sourceTable",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "datasetSQL",
+						"type": "DatasetReference",
+						"parameters": {
+							"dbNameFromDataSet": {
+								"value": "@pipeline().parameters.dbNameFromPipeline",
+								"type": "Expression"
+							},
+							"tableName": {
+								"value": "@pipeline().parameters.destinationTable",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"sourceTable": {
+				"type": "string"
+			},
+			"dbNameFromPipeline": {
+				"type": "string"
+			},
+			"destinationTable": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-08-17T15:14:42Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
